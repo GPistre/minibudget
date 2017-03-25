@@ -44,6 +44,10 @@ class ExpenseManager(Resource):
                                    type=str,
                                    required=True)
 
+        self.reqparse.add_argument('common',
+                                   type=int,
+                                   required=True)
+
         super(ExpenseManager, self).__init__()
 
     def post(self):
@@ -62,7 +66,8 @@ class ExpenseManager(Resource):
         expense = models.Expense(amount=args['expense'],
                                  user=user,
                                  group=user_group,
-                                 domain=args['domain'])
+                                 domain=args['domain'],
+                                 personal=args['common'])
 
         db.session.add(expense)
         db.session.commit()
@@ -71,7 +76,6 @@ class ExpenseManager(Resource):
 
         for exp in expenses:
             print(exp.group, exp.domain, exp.amount)
-        # print(exp[3].amount)
 
         return args
 

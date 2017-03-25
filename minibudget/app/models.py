@@ -38,14 +38,14 @@ class Expense(db.Model):
     user = db.Column(db.Integer, db.ForeignKey('user.id'))
     group = db.Column(db.Integer, db.ForeignKey('budget_group.id'))
     timestamp = db.Column(db.DateTime)
-    personal = db.Column(db.Integer)
+    common = db.Column(db.Integer)
     domain = db.Column(db.String(64))
 
-    def __init__(self, amount, user, group, domain, personal):
+    def __init__(self, amount, user, group, domain, common):
         self.amount = amount
         self.user = user.id
         self.group = group.id
         self.domain = domain
-        self.personal = personal
+        self.common = common
         self.timestamp = datetime.now()
 
