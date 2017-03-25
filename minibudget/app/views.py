@@ -67,7 +67,7 @@ class ExpenseManager(Resource):
                                  user=user,
                                  group=user_group,
                                  domain=args['domain'],
-                                 personal=args['common'])
+                                 common=args['common'])
 
         db.session.add(expense)
         db.session.commit()
