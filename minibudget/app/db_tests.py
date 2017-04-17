@@ -12,7 +12,7 @@ db.session.add(group2)
 db.session.commit()
 
 groups = BudgetGroup.query
-brea = groups.filter_by(group_name='bread').first()
+brea = groups.filter_by(group_name='brea').first()
 
 gerome = User('gerome', brea)
 siyu = User('siyu', brea)

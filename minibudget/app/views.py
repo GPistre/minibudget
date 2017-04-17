@@ -19,13 +19,16 @@ def group_view(group_name):
     groups = models.BudgetGroup.query.filter_by(group_name=group_name).first()
 
     if groups:
-        summary = common_expense_global_summary(group_name)
-        timeline = common_expense_timeline(group_name)
-        comparison = common_expense_comparison(group_name)
+        try:
+            summary = common_expense_global_summary(group_name)
+            timeline = common_expense_timeline(group_name)
+            comparison = common_expense_comparison(group_name)
 
-        script, div = components(row(summary, timeline, comparison))
+            script, div = components(row(summary, timeline, comparison))
 
-        return render_template('index.html', group_name=group_name.capitalize(), script=script, plots_div=div)
+            return render_template('index.html', group_name=group_name.capitalize(), script=script, plots_div=div)
+        except:
+            return 'no expenses yet'
     else:
         return 'No such group'
 
