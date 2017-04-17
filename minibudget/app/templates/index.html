@@ -1,0 +1,42 @@
+<link
+    href="http://cdn.pydata.org/bokeh/release/bokeh-0.12.4.min.css"
+    rel="stylesheet" type="text/css">
+<link
+    href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.4.min.css"
+    rel="stylesheet" type="text/css">
+
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.4.min.js"></script>
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.4.min.js"></script>
+
+<style>
+    body {
+        text-align: center;
+    }
+    h1 {
+        margin-top: 100px;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    .bk-root {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .bk-plot-wrapper table {
+        margin: 0 auto;
+    }
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Finances group {{ group_name }}</title>
+</head>
+<body>
+    <h1>{{ group_name }} budget group</h1>
+    <br><br>
+    <div id="plots">
+    {{ plots_div|safe }}
+    </div>
+    {{ script|safe }}
+</body>
+</html>

@@ -1,6 +1,9 @@
 from flask import Blueprint, render_template
 from flask_restful import Api, Resource, reqparse
 from app import db, models
+from bokeh.layouts import row
+from bokeh.embed import components
+from plots import *
 api_bp = Blueprint('api', __name__)
 api = Api(api_bp)
 
@@ -8,7 +11,23 @@ api = Api(api_bp)
 @api_bp.route('/')
 @api_bp.route('/index')
 def index():
-    return "Hello, World!"
+    return "Usage : http://site_address/group/<group_name>"
+
+
+@api_bp.route('/group/<group_name>')
+def group_view(group_name):
+    groups = models.BudgetGroup.query.filter_by(group_name=group_name).first()
+
+    if groups:
+        summary = common_expense_global_summary(group_name)
+        timeline = common_expense_timeline(group_name)
+        comparison = common_expense_comparison(group_name)
+
+        script, div = components(row(summary, timeline, comparison))
+
+        return render_template('index.html', group_name=group_name.capitalize(), script=script, plots_div=div)
+    else:
+        return 'No such group'
 
 
 class GroupManager(Resource):

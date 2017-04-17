@@ -1,5 +1,3 @@
-from flask import Flask
-from flask_restful import Api, Resource, reqparse
 from flask_httpauth import HTTPBasicAuth
 from app.views import api_bp
 from app import db, app
